@@ -33,3 +33,9 @@ jobs:
         echo "Current Workdir: $(pwd)"
         ls -la
 
+    - name: Install dependencies
+      run: |
+        npm install --legacy-peer-deps
+        echo "Listing node_modules..."
+        ls -d node_modules/ || echo "node_modules missing!"
+
