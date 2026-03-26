@@ -37,17 +37,17 @@ jobs:
         echo "Checking dist folder structure..."
         ls -R dist/ || (echo "dist folder missing or empty!" && exit 1)
 
-    - name: Sync Capacitor
+    - name: Clean and Add Android Platform
       run: |
-        npx cap doctor > cap-doctor.log 2>&1 || true
-        npx cap update android > cap-update.log 2>&1 || true
+        rm -rf android
+        npx cap add android
         npx cap sync android --verbose > cap-sync.log 2>&1
 
     - name: Build with Gradle
       run: |
         cd android
         chmod +x gradlew
-        ./gradlew assembleDebug --debug --stacktrace > gradle-build.log 2>&1
+        ./gradlew assembleDebug --debug --stacktrace > gradle-build.log 2>&1 || (cat gradle-build.log && exit 1)
 
     - name: Upload Workspace on Failure
       if: always()
