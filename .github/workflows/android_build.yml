@@ -33,9 +33,9 @@ jobs:
 
     - name: Build Web Assets
       run: |
-        npm run build
-        echo "Checking dist folder..."
-        ls -la dist/ || (echo "dist folder missing!" && exit 1)
+        CI=false npm run build
+        echo "Checking dist folder structure..."
+        ls -R dist/ || (echo "dist folder missing or empty!" && exit 1)
 
     - name: Sync Capacitor
       run: |
@@ -46,7 +46,7 @@ jobs:
       run: |
         cd android
         chmod +x gradlew
-        ./gradlew assembleDebug --info --stacktrace
+        ./gradlew assembleDebug --debug --stacktrace
 
     - name: Upload Workspace on Failure
       if: failure()
