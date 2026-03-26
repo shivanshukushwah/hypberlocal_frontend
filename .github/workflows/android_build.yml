@@ -28,8 +28,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        rm -f package-lock.json
         npm install --legacy-peer-deps
+        npm list @capacitor/cli || (echo "Capacitor CLI missing!" && exit 1)
 
     - name: Build Web Assets
       run: |
@@ -37,12 +37,12 @@ jobs:
         mkdir -p dist
         touch dist/index.html
         echo "Checking dist folder structure..."
-        ls -R dist/ || (echo "dist folder missing or empty!" && exit 1)
+        ls -la dist/ || (echo "dist folder missing or empty!" && exit 1)
 
     - name: Clean and Add Android Platform
       run: |
         rm -rf android
-        npx cap add android
+        npm exec cap add android
         # Restore stable versions
         echo "ext {
             minSdkVersion = 22
@@ -66,7 +66,7 @@ jobs:
             <color name='colorPrimaryDark'>#3700B3</color>
             <color name='colorAccent'>#03DAC5</color>
         </resources>" > android/app/src/main/res/values/colors.xml
-        npx cap sync android --verbose
+        npm exec cap sync android -- --verbose
 
     - name: Build with Gradle
       run: |
