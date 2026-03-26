@@ -39,25 +39,25 @@ jobs:
 
     - name: Sync Capacitor
       run: |
-        npx cap doctor
-        npx cap update android
-        npx cap sync android --verbose
+        npx cap doctor > cap-doctor.log 2>&1 || true
+        npx cap update android > cap-update.log 2>&1 || true
+        npx cap sync android --verbose > cap-sync.log 2>&1
 
     - name: Build with Gradle
       run: |
         cd android
         chmod +x gradlew
-        ./gradlew assembleDebug --debug --stacktrace
+        ./gradlew assembleDebug --debug --stacktrace > gradle-build.log 2>&1
 
     - name: Upload Workspace on Failure
-      if: failure()
+      if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: workspace-on-failure
+        name: workspace-diagnostics
         path: |
           dist/
           android/app/build/reports/
-          npm-debug.log
+          *.log
           package.json
           capacitor.config.json
 
