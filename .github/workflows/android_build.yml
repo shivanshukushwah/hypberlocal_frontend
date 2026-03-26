@@ -48,7 +48,20 @@ jobs:
         chmod +x gradlew
         ./gradlew assembleDebug --info --stacktrace
 
+    - name: Upload Workspace on Failure
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: workspace-on-failure
+        path: |
+          dist/
+          android/app/build/reports/
+          npm-debug.log
+          package.json
+          capacitor.config.json
+
     - name: Upload APK
+      if: success()
       uses: actions/upload-artifact@v4
       with:
         name: app-debug
