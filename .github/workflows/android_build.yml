@@ -32,7 +32,7 @@ jobs:
 
     - name: Build Web Assets
       run: |
-        CI=false npm run build
+        npx vite build --logLevel debug
         mkdir -p dist
         touch dist/index.html
         echo "Checking dist folder structure..."
