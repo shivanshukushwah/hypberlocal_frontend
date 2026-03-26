@@ -32,11 +32,11 @@ jobs:
 
     - name: Build Web Assets
       run: |
-        npx vite build --logLevel debug
+        npx vite build --logLevel debug > vite-build.log 2>&1 || (cat vite-build.log && exit 1)
         mkdir -p dist
         touch dist/index.html
         echo "Checking dist folder structure..."
-        ls -la dist/
+        ls -la dist/Platform
 
     - name: Clean and Add Android Platform
       run: |
