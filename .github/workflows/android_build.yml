@@ -32,14 +32,42 @@ jobs:
 
     - name: Build Web Assets
       run: |
-        npx vite build --logLevel debug > vite-build.log 2>&1 || (cat vite-build.log && exit 1)
-        mkdir -p dist
-        touch dist/index.html
-        echo "Checking dist folder structure..."
-        ls -la dist/
+        npm run build
+        ls -la dist
+        find dist -name index.html
 
     - name: Capacitor Sync
       run: |
+        # Ensure android folder exists or add it
+        if [ ! -d "android" ]; then
+          npx cap add android
+        fi
+        
+        # Restore stable versions to android/variables.gradle
+        echo "ext {
+            minSdkVersion = 22
+            compileSdkVersion = 34
+            targetSdkVersion = 34
+            androidxActivityVersion = '1.9.1'
+            androidxAppCompatVersion = '1.7.0'
+            androidxCoordinatorLayoutVersion = '1.2.0'
+            androidxCoreVersion = '1.13.1'
+            androidxFragmentVersion = '1.8.2'
+            junitVersion = '4.13.2'
+            androidxJunitVersion = '1.2.1'
+            androidxEspressoCoreVersion = '3.6.1'
+            cordovaAndroidVersion = '10.1.1'
+        }" > android/variables.gradle
+        
+        # Restore missing resources
+        mkdir -p android/app/src/main/res/values
+        echo "<?xml version='1.0' encoding='utf-8'?>
+        <resources>
+            <color name='colorPrimary'>#6200EE</color>
+            <color name='colorPrimaryDark'>#3700B3</color>
+            <color name='colorAccent'>#03DAC5</color>
+        </resources>" > android/app/src/main/res/values/colors.xml
+        
         npx cap sync android --verbose
 
     - name: Build with Gradle
