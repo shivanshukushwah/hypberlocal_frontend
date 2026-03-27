@@ -41,7 +41,14 @@ jobs:
       run: |
         cd android
         chmod +x gradlew
-        ./gradlew assembleDebug --debug --stacktrace
+        ./gradlew assembleDebug --no-daemon --stacktrace
+
+    - name: Upload Build Report
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-report
+        path: android/app/build/reports/
 
     - name: Upload APK
       if: success()
