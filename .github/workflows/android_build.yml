@@ -36,7 +36,7 @@ jobs:
         mkdir -p dist
         touch dist/index.html
         echo "Checking dist folder structure..."
-        ls -la dist/Platform
+        ls -la dist/
 
     - name: Clean and Add Android Platform
       run: |
