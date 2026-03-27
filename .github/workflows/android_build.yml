@@ -42,7 +42,16 @@ jobs:
         npm run build
     - name: Capacitor Sync
       run: |
-        npx cap sync android
+        npx cap sync android --verbose
+
+    - name: Diagnostic - List Files
+      run: |
+        echo "Root directory:"
+        ls -F
+        echo "Android directory:"
+        ls -R android/ | grep -v "node_modules" | head -n 100
+        echo "Web assets in Android:"
+        ls -F android/app/src/main/assets/public/ || echo "Assets dir missing"
 
     - name: Build with Gradle
       run: |
