@@ -40,8 +40,9 @@ jobs:
 
     - name: Clean and Add Android Platform
       run: |
+        ls -la dist
         rm -rf android
-        npx cap add android
+        npx cap add android --verbose
         # Restore stable versions
         echo "ext {
             minSdkVersion = 22
