@@ -45,56 +45,62 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-[80vh] w-full mt-8">
-            <div className="glass-dark w-full max-w-md p-10 rounded-3xl animate-[fade-in_0.5s_ease-out]">
-                <div className="text-center mb-10">
-                    <h2 className="text-4xl font-extrabold gradient-text inline-block mb-3">Welcome Back</h2>
-                    <p className="text-slate-400 text-sm font-medium">Passwordless Login powered by Supabase</p>
+        <div className="flex items-center justify-center min-h-[75vh] w-full px-4 sm:px-0 animate-[fade-in_0.5s_ease-out]">
+            <div className="glass w-full max-w-md p-8 sm:p-10 rounded-3xl shadow-2xl shadow-teal-500/5 border border-white/60">
+                <div className="text-center mb-8 sm:mb-10">
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-800 tracking-tight leading-tight">
+                        Welcome <span className="gradient-text">Back.</span>
+                    </h2>
+                    <p className="text-slate-500 text-sm mt-2 font-medium">Fast, secure, and passwordless.</p>
                 </div>
                 
-                {error && <div className="bg-rose-500/10 border border-rose-500/30 text-rose-400 px-4 py-3 rounded-xl mb-6 text-sm flex items-center">{error}</div>}
-                {message && <div className="bg-teal-500/10 border border-teal-500/30 text-teal-400 px-4 py-3 rounded-xl mb-6 text-sm flex items-center">{message}</div>}
+                {error && <div className="bg-rose-50 border border-rose-100 text-rose-500 px-4 py-3 rounded-xl mb-6 text-xs sm:text-sm font-semibold flex items-center shadow-sm animate-shake">{error}</div>}
+                {message && <div className="bg-teal-50 border border-teal-100 text-teal-600 px-4 py-3 rounded-xl mb-6 text-xs sm:text-sm font-semibold flex items-center shadow-sm">{message}</div>}
 
                 {step === 1 && (
-                    <form onSubmit={handleSendOTP} className="space-y-5">
+                    <form onSubmit={handleSendOTP} className="space-y-4 sm:space-y-6">
                         <div className="relative group">
-                            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-teal-400 transition-colors" size={20} />
-                            <input type="email" required placeholder="Email Address"
+                            <label className="text-[10px] uppercase tracking-widest font-black text-slate-400 ml-1 mb-1.5 block">Email Identity</label>
+                            <Mail className="absolute left-4 top-[38px] text-slate-400 group-focus-within:text-teal-500 transition-colors" size={18} />
+                            <input type="email" required placeholder="name@email.com"
                                    value={email}
-                                   className="w-full bg-slate-800/40 border border-slate-700/50 rounded-2xl py-3.5 pl-12 pr-4 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-transparent transition-all"
+                                   className="w-full bg-white border border-slate-200 rounded-2xl py-3 sm:py-3.5 pl-11 pr-4 text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-400 transition-all font-medium text-sm sm:text-base shadow-sm"
                                    onChange={e => setEmail(e.target.value)} />
                         </div>
-                        <button type="submit" className="w-full mt-4 py-4 rounded-2xl bg-gradient-to-r from-teal-500 to-blue-500 text-white font-bold text-lg hover-scale shadow-[0_0_20px_rgba(20,184,166,0.25)] flex items-center justify-center gap-2 border border-white/10">
-                            <LogIn size={20} /> Send Login OTP
+                        <button type="submit" className="w-full mt-2 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-teal-500 to-blue-500 text-white font-extrabold text-base sm:text-lg hover-scale shadow-lg shadow-teal-500/20 flex items-center justify-center gap-2 active:scale-95 transition-transform">
+                            Send Login OTP <LogIn size={18} />
                         </button>
                     </form>
                 )}
 
                 {step === 2 && (
-                    <form onSubmit={handleVerifyOTP} className="space-y-5">
-                        <div className="text-slate-300 text-sm mb-4 text-center">
-                            OTP sent to <strong>{email}</strong>
-                            <button type="button" onClick={() => setStep(1)} className="ml-2 text-teal-400 hover:text-teal-300 text-xs">Change</button>
+                    <form onSubmit={handleVerifyOTP} className="space-y-4 sm:space-y-6">
+                        <div className="text-slate-500 text-xs sm:text-sm mb-4 text-center bg-slate-50 py-2 rounded-xl border border-slate-100 italic">
+                            OTP sent to <span className="text-slate-800 font-bold">{email}</span>
+                            <button type="button" onClick={() => setStep(1)} className="ml-2 text-teal-600 font-bold hover:underline">Edit</button>
                         </div>
                         <div className="relative group">
-                            <KeyRound className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-teal-400 transition-colors" size={20} />
-                            <input type="text" required placeholder="Enter 6-digit OTP" maxLength="6"
+                            <label className="text-[10px] uppercase tracking-widest font-black text-slate-400 ml-1 mb-1.5 block">6-Digit Key</label>
+                            <KeyRound className="absolute left-4 top-[38px] text-slate-400 group-focus-within:text-teal-500 transition-colors" size={18} />
+                            <input type="text" required placeholder="••••••" maxLength="6"
                                    value={otp}
-                                   className="w-full tracking-widest text-center text-2xl font-mono bg-slate-800/40 border border-slate-700/50 rounded-2xl py-3.5 px-4 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-transparent transition-all"
+                                   className="w-full tracking-[0.5em] text-center text-2xl font-black bg-white border border-slate-200 rounded-2xl py-3 sm:py-3.5 px-4 text-slate-800 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-400 transition-all shadow-sm"
                                    onChange={e => setOtp(e.target.value)} />
                         </div>
-                        <button type="submit" className="w-full mt-4 py-4 rounded-2xl bg-gradient-to-r from-teal-500 to-blue-500 text-white font-bold text-lg hover-scale shadow-[0_0_20px_rgba(20,184,166,0.25)] flex items-center justify-center gap-2 border border-white/10">
+                        <button type="submit" className="w-full mt-2 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-teal-500 to-blue-500 text-white font-extrabold text-base sm:text-lg hover-scale shadow-lg shadow-teal-500/20 flex items-center justify-center gap-2 active:scale-95 transition-transform">
                             Verify & Sign In
                         </button>
-                        <button type="button" onClick={handleSendOTP} className="w-full text-slate-400 hover:text-white mt-2 text-sm font-medium transition-colors">
-                            Resend OTP
+                        <button type="button" onClick={handleSendOTP} className="w-full text-slate-400 hover:text-teal-600 mt-2 text-xs sm:text-sm font-bold transition-colors">
+                            Did not receive OTP? Resend
                         </button>
                     </form>
                 )}
 
-                <p className="text-center text-slate-400 mt-8 text-sm font-medium">
-                    Don't have an account? <Link to="/register" className="text-teal-400 font-bold hover:text-teal-300 tracking-wide transition-colors">Join now</Link>
-                </p>
+                <div className="mt-8 pt-8 border-t border-slate-100 text-center">
+                    <p className="text-slate-400 text-xs sm:text-sm font-bold uppercase tracking-tight">
+                        New to neighborhood? <Link to="/register" className="text-teal-500 hover:text-teal-600 transition-colors ml-1">Join HyperLocal</Link>
+                    </p>
+                </div>
             </div>
         </div>
     );
