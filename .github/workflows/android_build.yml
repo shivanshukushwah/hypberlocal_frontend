@@ -42,7 +42,7 @@ jobs:
         npm run build
     - name: Capacitor Sync
       run: |
-        npx cap sync android --verbose
+        npx cap sync android
 
     - name: Diagnostic - List Files
       run: |
