@@ -33,10 +33,10 @@ function AppContent() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col relative w-full overflow-hidden bg-[#020617] text-slate-200">
+    <div className="min-h-screen flex flex-col relative w-full overflow-hidden bg-[#050811] text-slate-200">
       {/* Premium background blurs */}
-      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-emerald-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <Navbar />
       <main className="flex-grow container mx-auto px-4 py-8 relative z-10 w-full max-w-7xl">

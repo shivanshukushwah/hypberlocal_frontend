@@ -30,7 +30,7 @@ const CustomerOrders = () => {
             'PLACED': { color: 'bg-slate-100 text-slate-600 border-slate-200', icon: <Clock size={14}/> },
             'PREPARING': { color: 'bg-amber-100 text-amber-700 border-amber-200', icon: <PackageOpen size={14}/> },
             'READY_FOR_PICKUP': { color: 'bg-blue-100 text-blue-700 border-blue-200', icon: <CheckCircle2 size={14}/> },
-            'OUT_FOR_DELIVERY': { color: 'bg-indigo-100 text-indigo-700 border-indigo-200', icon: <Truck size={14}/> },
+            'OUT_FOR_DELIVERY': { color: 'bg-emerald-100 text-emerald-700 border-emerald-200', icon: <Truck size={14}/> },
             'DELIVERED': { color: 'bg-teal-100 text-teal-700 border-teal-200', icon: <CheckCircle2 size={14}/> },
         };
         const config = statusConfig[status] || statusConfig['PLACED'];

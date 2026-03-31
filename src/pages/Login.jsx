@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { Mail, Lock, LogIn, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Mail, Lock, LogIn, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
 
 const Login = () => {
     const location = useLocation();
@@ -34,12 +34,12 @@ const Login = () => {
     return (
         <div className="flex items-center justify-center min-h-[90vh] w-full px-4 relative overflow-hidden">
             {/* Background decorative elements */}
-            <div className="absolute top-1/4 -left-10 w-64 h-64 bg-indigo-600/20 rounded-full blur-3xl animate-pulse-slow font-black"></div>
-            <div className="absolute bottom-1/4 -right-10 w-64 h-64 bg-violet-600/20 rounded-full blur-3xl animate-pulse-slow"></div>
+            <div className="absolute top-1/4 -left-10 w-64 h-64 bg-emerald-600/20 rounded-full blur-3xl animate-pulse-slow font-black"></div>
+            <div className="absolute bottom-1/4 -right-10 w-64 h-64 bg-cyan-600/20 rounded-full blur-3xl animate-pulse-slow"></div>
 
             <div className="glass w-full max-w-lg p-8 sm:p-12 rounded-[2.5rem] relative z-10 animate-float">
                 <div className="text-center mb-10">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 mb-6 text-indigo-400">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 mb-6 text-emerald-400">
                         <ShieldCheck size={32} />
                     </div>
                     <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tighter leading-tight mb-3">
@@ -59,7 +59,7 @@ const Login = () => {
                     <div className="space-y-2">
                         <label className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Email Address</label>
                         <div className="relative group">
-                            <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-indigo-400 transition-colors" size={20} />
+                            <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={20} />
                             <input 
                                 type="email" 
                                 required 
@@ -74,10 +74,10 @@ const Login = () => {
                     <div className="space-y-2">
                         <div className="flex justify-between items-center px-1">
                             <label className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Password</label>
-                            <Link to="/forgot-password" size="sm" className="text-[10px] font-bold text-indigo-400 hover:text-indigo-300 uppercase tracking-wider">Forgot?</Link>
+                            <Link to="/forgot-password" size="sm" className="text-[10px] font-bold text-emerald-400 hover:text-emerald-300 uppercase tracking-wider">Forgot?</Link>
                         </div>
                         <div className="relative group">
-                            <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-indigo-400 transition-colors" size={20} />
+                            <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={20} />
                             <input 
                                 type="password" 
                                 required 
@@ -102,7 +102,7 @@ const Login = () => {
                 <div className="mt-12 pt-8 border-t border-white/5 text-center">
                     <p className="text-slate-400 text-sm font-medium">
                         Don't have an account? 
-                        <Link to="/register" className="text-indigo-400 hover:text-indigo-300 font-bold ml-2 transition-colors inline-flex items-center gap-1 group">
+                        <Link to="/register" className="text-emerald-400 hover:text-emerald-300 font-bold ml-2 transition-colors inline-flex items-center gap-1 group">
                             Create Account
                             <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
                         </Link>

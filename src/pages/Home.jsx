@@ -14,9 +14,9 @@ const Home = () => {
         return (
             <div className="flex flex-col items-center justify-center min-h-[85vh] text-center px-4 relative overflow-hidden">
                 {/* Decorative background blur */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[120px] -z-10 animate-pulse-slow"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[120px] -z-10 animate-pulse-slow"></div>
                 
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-white/10 text-indigo-400 text-xs font-bold uppercase tracking-widest mb-8 animate-float">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-white/10 text-emerald-400 text-xs font-bold uppercase tracking-widest mb-8 animate-float">
                     <Sparkles size={14} />
                     <span>The Future of Local Commerce</span>
                 </div>
@@ -47,7 +47,7 @@ const Home = () => {
                         { icon: <ShoppingBag size={20}/>, title: 'Premium Quality', desc: 'Handpicked products.' }
                     ].map((feat, i) => (
                         <div key={i} className="glass p-6 rounded-3xl text-left border-white/5 hover:border-white/10 transition-colors">
-                            <div className="text-indigo-400 mb-4">{feat.icon}</div>
+                            <div className="text-emerald-400 mb-4">{feat.icon}</div>
                             <h3 className="text-white font-bold mb-1">{feat.title}</h3>
                             <p className="text-slate-500 text-sm">{feat.desc}</p>
                         </div>
@@ -61,7 +61,7 @@ const Home = () => {
     return (
         <div className="w-full mt-6 sm:mt-10 animate-[fade-in_0.5s_ease-out] px-4">
             <div className="glass p-8 rounded-[2.5rem] border-white/5 mb-10 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+                <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
                 
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
@@ -76,7 +76,7 @@ const Home = () => {
                     </div>
                     {user.role === 'CUSTOMER' && (
                         <div className="flex gap-4">
-                            <button className="glass-indigo px-6 py-3 rounded-2xl text-indigo-300 font-bold text-sm uppercase tracking-widest hover:bg-indigo-500/20 transition-all flex items-center gap-2">
+                            <button className="glass-emerald px-6 py-3 rounded-2xl text-emerald-300 font-bold text-sm uppercase tracking-widest hover:bg-emerald-500/20 transition-all flex items-center gap-2">
                                 <MapPin size={16} /> Trends
                             </button>
                         </div>

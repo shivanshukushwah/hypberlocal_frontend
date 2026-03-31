@@ -34,12 +34,12 @@ const Register = () => {
     return (
         <div className="flex items-center justify-center min-h-[100vh] w-full px-4 py-12 relative overflow-hidden">
              {/* Background decorative elements */}
-             <div className="absolute top-1/4 -right-20 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px] animate-pulse"></div>
-             <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-violet-600/10 rounded-full blur-[120px] animate-pulse"></div>
+             <div className="absolute top-1/4 -right-20 w-96 h-96 bg-emerald-600/10 rounded-full blur-[120px] animate-pulse"></div>
+             <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-teal-600/10 rounded-full blur-[120px] animate-pulse"></div>
 
             <div className="glass w-full max-w-2xl p-8 sm:p-12 rounded-[3rem] relative z-10 animate-float">
                 <div className="text-center mb-12">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 mb-6 text-indigo-400">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 mb-6 text-emerald-400">
                         <Sparkles size={32} />
                     </div>
                     <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-4">
@@ -63,7 +63,7 @@ const Register = () => {
                                 key={role} 
                                 type="button" 
                                 onClick={() => setFormData({...formData, role})}
-                                className={`flex-1 py-3.5 text-xs font-bold rounded-xl transition-all duration-300 uppercase tracking-widest ${formData.role === role ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/25' : 'text-slate-400 hover:bg-white/5'}`}
+                                className={`flex-1 py-3.5 text-xs font-bold rounded-xl transition-all duration-300 uppercase tracking-widest ${formData.role === role ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-500/25' : 'text-slate-400 hover:bg-white/5'}`}
                             >
                                 {role}
                             </button>
@@ -74,14 +74,14 @@ const Register = () => {
                         <div className="space-y-2 group">
                             <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Full Name</label>
                             <div className="relative">
-                                <User className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-indigo-400 transition-colors" size={18} />
+                                <User className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
                                 <input type="text" name="name" required placeholder="Full Name" className="input-field pl-14 h-14" onChange={handleChange} />
                             </div>
                         </div>
                         <div className="space-y-2 group">
                             <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Mobile Number</label>
                             <div className="relative">
-                                <Phone className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-indigo-400 transition-colors" size={18} />
+                                <Phone className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
                                 <input type="text" name="phone" required placeholder="+91 00000 00000" className="input-field pl-14 h-14" onChange={handleChange} />
                             </div>
                         </div>
@@ -91,14 +91,14 @@ const Register = () => {
                         <div className="space-y-2 group">
                             <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Country</label>
                             <div className="relative">
-                                <Globe className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-indigo-400 transition-colors" size={18} />
+                                <Globe className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
                                 <input type="text" name="country" required placeholder="India" className="input-field pl-14 h-14" onChange={handleChange} />
                             </div>
                         </div>
                         <div className="space-y-2 group">
                             <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">State</label>
                             <div className="relative">
-                                <Map className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-indigo-400 transition-colors" size={18} />
+                                <Map className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
                                 <input type="text" name="state" required placeholder="State" className="input-field pl-14 h-14" onChange={handleChange} />
                             </div>
                         </div>
@@ -107,7 +107,7 @@ const Register = () => {
                     <div className="space-y-2 group">
                         <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Complete Address</label>
                         <div className="relative">
-                            <MapPin className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-indigo-400 transition-colors" size={18} />
+                            <MapPin className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
                             <input type="text" name="address" required placeholder="House No, Street, Landmark" className="input-field pl-14 h-14" onChange={handleChange} />
                         </div>
                     </div>
@@ -115,7 +115,7 @@ const Register = () => {
                     <div className="space-y-2 group">
                         <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Account Email</label>
                         <div className="relative">
-                            <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-indigo-400 transition-colors" size={18} />
+                            <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
                             <input type="email" name="email" required placeholder="your@email.com" value={formData.email} className="input-field pl-14 h-14" onChange={handleChange} />
                         </div>
                     </div>
@@ -123,7 +123,7 @@ const Register = () => {
                     <div className="space-y-2 group">
                         <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Security Password</label>
                         <div className="relative">
-                            <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-indigo-400 transition-colors" size={18} />
+                            <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
                             <input type="password" name="password" required placeholder="••••••••" className="input-field pl-14 h-14" onChange={handleChange} />
                         </div>
                     </div>
@@ -141,7 +141,7 @@ const Register = () => {
                 <div className="mt-12 pt-10 border-t border-white/5 text-center">
                     <p className="text-slate-400 font-medium">
                         Already a member? 
-                        <Link to="/login" className="text-indigo-400 hover:text-indigo-300 font-bold ml-2 transition-colors">Sign in here</Link>
+                        <Link to="/login" className="text-emerald-400 hover:text-emerald-300 font-bold ml-2 transition-colors">Sign in here</Link>
                     </p>
                 </div>
             </div>

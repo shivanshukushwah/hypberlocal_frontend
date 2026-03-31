@@ -57,12 +57,12 @@ const WalletPage = () => {
         }
     };
 
-    if (loading) return <div className="p-12 text-center text-indigo-600 font-bold animate-pulse">Loading secure wallet...</div>;
+    if (loading) return <div className="p-12 text-center text-emerald-600 font-bold animate-pulse">Loading secure wallet...</div>;
 
     return (
         <div className="max-w-4xl mx-auto space-y-8 animate-[fade-in_0.3s_ease-out]">
             <div className="flex items-center gap-3 mb-8">
-                <div className="p-3 bg-gradient-to-br from-indigo-500 to-violet-600 rounded-2xl shadow-lg">
+                <div className="p-3 bg-gradient-to-br from-emerald-500 to-cyan-600 rounded-2xl shadow-lg">
                     <Wallet className="text-white" size={28} />
                 </div>
                 <h2 className="text-3xl font-black text-slate-800 tracking-tight">Your Earnings</h2>
@@ -70,38 +70,38 @@ const WalletPage = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Balance Card */}
-                <div className="bg-gradient-to-br from-indigo-600 to-violet-700 p-8 rounded-[2.5rem] shadow-2xl shadow-indigo-500/20 text-white relative overflow-hidden">
+                <div className="bg-gradient-to-br from-emerald-600 to-cyan-700 p-8 rounded-[2.5rem] shadow-2xl shadow-emerald-500/20 text-white relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
-                    <p className="text-indigo-100 font-bold uppercase tracking-widest text-sm mb-2 opacity-80">Available Balance</p>
+                    <p className="text-emerald-100 font-bold uppercase tracking-widest text-sm mb-2 opacity-80">Available Balance</p>
                     <h3 className="text-5xl font-black mb-8">₹{balanceData.balance.toFixed(2)}</h3>
                     
                     <div className="bg-white/10 backdrop-blur border border-white/20 p-4 rounded-2xl flex justify-between items-center">
-                        <span className="text-indigo-100 font-semibold text-sm">Pending Withdrawals:</span>
+                        <span className="text-emerald-100 font-semibold text-sm">Pending Withdrawals:</span>
                         <span className="font-bold">₹{balanceData.pendingWithdrawal.toFixed(2)}</span>
                     </div>
                 </div>
 
                 {/* Withdraw Form */}
-                <div className="glass p-8 rounded-[2.5rem] border border-indigo-50 shadow-sm">
+                <div className="glass p-8 rounded-[2.5rem] border border-emerald-50 shadow-sm">
                     <h3 className="text-xl font-black text-slate-800 mb-6 flex items-center gap-2 tracking-tight">
-                        <Landmark className="text-indigo-500" size={20} /> Request Withdrawal
+                        <Landmark className="text-emerald-500" size={20} /> Request Withdrawal
                     </h3>
                     <form onSubmit={handleWithdraw} className="space-y-4">
                         <div className="grid grid-cols-2 gap-4">
                             <input type="number" placeholder="Amount (₹)" required min="100" max={balanceData.balance}
-                                className="col-span-2 bg-slate-50 border border-slate-100 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 font-bold text-sm"
+                                className="col-span-2 bg-slate-50 border border-slate-100 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 font-bold text-sm"
                                 value={withdrawForm.amount} onChange={e => setWithdrawForm({...withdrawForm, amount: e.target.value})}
                             />
                             <input type="text" placeholder="Account Holder Name" required 
-                                className="col-span-2 bg-slate-50 border border-slate-100 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 font-bold text-sm"
+                                className="col-span-2 bg-slate-50 border border-slate-100 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 font-bold text-sm"
                                 value={withdrawForm.accountName} onChange={e => setWithdrawForm({...withdrawForm, accountName: e.target.value})}
                             />
                             <input type="text" placeholder="Account Number" required 
-                                className="bg-slate-50 border border-slate-100 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 font-bold text-sm truncate"
+                                className="bg-slate-50 border border-slate-100 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 font-bold text-sm truncate"
                                 value={withdrawForm.accountNumber} onChange={e => setWithdrawForm({...withdrawForm, accountNumber: e.target.value})}
                             />
                             <input type="text" placeholder="IFSC Code" required 
-                                className="bg-slate-50 border border-slate-100 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 font-bold text-sm uppercase"
+                                className="bg-slate-50 border border-slate-100 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 font-bold text-sm uppercase"
                                 value={withdrawForm.ifscCode} onChange={e => setWithdrawForm({...withdrawForm, ifscCode: e.target.value.toUpperCase()})}
                             />
                         </div>
@@ -113,9 +113,9 @@ const WalletPage = () => {
             </div>
 
             {/* History Table */}
-            <div className="glass p-8 rounded-[2.5rem] border border-indigo-50 shadow-sm mt-8">
+            <div className="glass p-8 rounded-[2.5rem] border border-emerald-50 shadow-sm mt-8">
                 <h3 className="text-xl font-black text-slate-800 mb-6 flex items-center gap-2 tracking-tight">
-                    <History className="text-indigo-500" size={20} /> Transaction History
+                    <History className="text-emerald-500" size={20} /> Transaction History
                 </h3>
                 {history.length === 0 ? (
                     <p className="text-slate-400 text-center py-8 font-medium">No withdrawal history available.</p>

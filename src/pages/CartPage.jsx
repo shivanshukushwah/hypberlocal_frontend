@@ -122,13 +122,13 @@ const CartPage = () => {
     if (cart.items.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4 animate-[fade-in_0.3s_ease-out]">
-                <div className="p-8 bg-indigo-50 rounded-full mb-8 relative">
-                    <div className="absolute inset-0 bg-indigo-400 blur-3xl opacity-20 rounded-full"></div>
-                    <ShoppingCart size={48} className="text-indigo-400 relative z-10" strokeWidth={1.5} />
+                <div className="p-8 bg-emerald-50 rounded-full mb-8 relative">
+                    <div className="absolute inset-0 bg-emerald-400 blur-3xl opacity-20 rounded-full"></div>
+                    <ShoppingCart size={48} className="text-emerald-400 relative z-10" strokeWidth={1.5} />
                 </div>
                 <h2 className="text-3xl sm:text-4xl font-black text-slate-800 mb-4 tracking-tight">Your bag is empty</h2>
                 <p className="text-slate-500 mb-10 font-medium max-w-md leading-relaxed">Discover clothing from local boutiques and shops right around your corner. Support local and get fast delivery.</p>
-                <button onClick={() => navigate('/')} className="px-10 py-4 rounded-full bg-indigo-600 text-white font-black hover:bg-indigo-700 shadow-xl shadow-indigo-100 active:scale-95 transition-all cursor-pointer uppercase tracking-widest text-sm">
+                <button onClick={() => navigate('/')} className="px-10 py-4 rounded-full bg-emerald-600 text-white font-black hover:bg-emerald-700 shadow-xl shadow-emerald-100 active:scale-95 transition-all cursor-pointer uppercase tracking-widest text-sm">
                     Browse Nearby Shops
                 </button>
             </div>
@@ -137,7 +137,7 @@ const CartPage = () => {
 
     return (
         <div className="max-w-5xl mx-auto w-full px-2 sm:px-4 animate-[fade-in_0.3s_ease-out]">
-            <button onClick={() => navigate(-1)} className="flex items-center gap-1.5 text-slate-400 hover:text-indigo-600 font-bold mb-6 sm:mb-8 text-xs uppercase tracking-widest transition-colors">
+            <button onClick={() => navigate(-1)} className="flex items-center gap-1.5 text-slate-400 hover:text-emerald-600 font-bold mb-6 sm:mb-8 text-xs uppercase tracking-widest transition-colors">
                 <ArrowLeft size={16} /> Back to Shop
             </button>
             
@@ -145,21 +145,21 @@ const CartPage = () => {
                 {/* Cart Items List */}
                 <div className="flex-grow">
                     <h2 className="text-2xl sm:text-4xl font-black text-slate-800 mb-6 sm:mb-10 tracking-tight flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 leading-tight">
-                        Checkout <span className="text-indigo-600 text-sm sm:text-lg font-black bg-indigo-50 px-3 py-1.5 rounded-xl w-fit uppercase tracking-widest border border-indigo-100/50">from {cart.shopName}</span>
+                        Checkout <span className="text-emerald-600 text-sm sm:text-lg font-black bg-emerald-50 px-3 py-1.5 rounded-xl w-fit uppercase tracking-widest border border-emerald-100/50">from {cart.shopName}</span>
                     </h2>
 
-                    <div className="glass p-6 sm:p-10 rounded-[2.5rem] border border-indigo-50/50 shadow-sm">
+                    <div className="glass p-6 sm:p-10 rounded-[2.5rem] border border-emerald-50/50 shadow-sm">
                         <h3 className="text-lg sm:text-2xl font-black text-slate-800 mb-6 sm:mb-10 border-b border-slate-50 pb-6 tracking-tight">Order Summary <span className="text-slate-300 ml-2 font-medium">({cart.items.length})</span></h3>
                         <div className="space-y-6 sm:space-y-10">
                             {cart.items.map((item, idx) => (
                                 <div key={idx} className="flex gap-4 sm:gap-8 items-center group">
                                     <div className="w-20 h-20 sm:w-28 sm:h-28 bg-slate-50 rounded-2xl sm:rounded-[2rem] overflow-hidden shrink-0 border border-slate-50 group-hover:shadow-lg transition-shadow">
-                                        {item.product.imageUrl ? <img src={item.product.imageUrl} className="w-full h-full object-cover mix-blend-multiply" /> : <div className="w-full h-full flex items-center justify-center bg-indigo-50/30 text-indigo-200"><ShoppingCart size={32} /></div>}
+                                        {item.product.imageUrl ? <img src={item.product.imageUrl} className="w-full h-full object-cover mix-blend-multiply" /> : <div className="w-full h-full flex items-center justify-center bg-emerald-50/30 text-emerald-200"><ShoppingCart size={32} /></div>}
                                     </div>
                                     <div className="flex-grow min-w-0">
-                                        <h4 className="font-black text-sm sm:text-xl text-slate-800 truncate tracking-tight group-hover:text-indigo-600 transition-colors uppercase">{item.product.name}</h4>
+                                        <h4 className="font-black text-sm sm:text-xl text-slate-800 truncate tracking-tight group-hover:text-emerald-600 transition-colors uppercase">{item.product.name}</h4>
                                         <p className="text-[10px] sm:text-xs font-black text-slate-400 mt-1 uppercase tracking-widest">SIZE: {item.size} • QTY: {item.quantity}</p>
-                                        <p className="font-black text-indigo-600 mt-2 sm:mt-4 text-base sm:text-2xl">₹{item.price * item.quantity}</p>
+                                        <p className="font-black text-emerald-600 mt-2 sm:mt-4 text-base sm:text-2xl">₹{item.price * item.quantity}</p>
                                     </div>
                                     <button onClick={() => removeFromCart(item.product._id, item.size)} className="p-3 text-slate-300 hover:text-rose-500 hover:bg-rose-50 rounded-2xl transition-all shrink-0 active:scale-90 border border-transparent hover:border-rose-100">
                                         <Trash2 size={24} />
@@ -172,7 +172,7 @@ const CartPage = () => {
 
                 {/* Checkout Panel */}
                 <div className="w-full md:w-96 shrink-0 pb-12 md:pb-0">
-                    <div className="glass p-6 sm:p-10 rounded-[2.5rem] sticky top-24 border border-indigo-100 shadow-2xl shadow-indigo-500/10">
+                    <div className="glass p-6 sm:p-10 rounded-[2.5rem] sticky top-24 border border-emerald-100 shadow-2xl shadow-emerald-500/10">
                         <h3 className="text-lg sm:text-2xl font-black text-slate-800 mb-8 sm:mb-10 tracking-tight uppercase">Payment</h3>
                         
                         <div className="space-y-4 mb-8 sm:mb-12 font-bold text-slate-500 text-sm sm:text-base border-b border-slate-50 pb-8">
@@ -182,30 +182,30 @@ const CartPage = () => {
                             </div>
                             <div className="flex justify-between">
                                 <span className="flex items-center gap-1.5 uppercase tracking-widest text-xs">Delivery <span className="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-black tracking-widest shadow-sm">Fast</span></span>
-                                <span className="text-indigo-600 font-black">FREE</span>
+                                <span className="text-emerald-600 font-black">FREE</span>
                             </div>
                             <div className="pt-4 mt-6 flex justify-between font-black text-slate-800 text-lg sm:text-2xl border-t border-slate-50">
                                 <span className="uppercase tracking-tighter">Total</span>
-                                <span className="text-indigo-600">₹{cart.totalAmount}</span>
+                                <span className="text-emerald-600">₹{cart.totalAmount}</span>
                             </div>
                         </div>
 
                         <form onSubmit={handleCheckout} className="space-y-6 sm:space-y-8">
                             <div>
-                                <label className="block text-xs font-black text-slate-400 mb-3 flex items-center gap-1.5 uppercase tracking-widest"><MapPin size={16} className="text-indigo-600"/> Delivery Address</label>
+                                <label className="block text-xs font-black text-slate-400 mb-3 flex items-center gap-1.5 uppercase tracking-widest"><MapPin size={16} className="text-emerald-600"/> Delivery Address</label>
                                 <textarea required rows="3" placeholder="Street, house number, landmark..." 
-                                    className="w-full bg-slate-50 border border-slate-100 rounded-2xl p-4 sm:p-5 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 font-bold text-xs sm:text-sm shadow-inner resize-none transition-all"
+                                    className="w-full bg-slate-50 border border-slate-100 rounded-2xl p-4 sm:p-5 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 font-bold text-xs sm:text-sm shadow-inner resize-none transition-all"
                                     value={deliveryAddress} onChange={e => setDeliveryAddress(e.target.value)}
                                 ></textarea>
                             </div>
 
                             <div className="flex flex-col gap-3">
-                                <div className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-1 mt-2">Payment Method</div>
+                                <div className="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-1 mt-2">Payment Method</div>
                                 <div className="flex gap-4">
-                                    <button type="button" onClick={() => setPaymentMethod('COD')} className={`flex-1 py-4 px-4 rounded-xl border-2 transition-all font-bold flex flex-col items-center justify-center gap-1 ${paymentMethod === 'COD' ? 'border-indigo-500 bg-indigo-50 text-indigo-700 shadow-[inset_0_0_0_2px_#6366f1]' : 'border-slate-100 bg-white text-slate-400 hover:border-indigo-200'}`}>
+                                    <button type="button" onClick={() => setPaymentMethod('COD')} className={`flex-1 py-4 px-4 rounded-xl border-2 transition-all font-bold flex flex-col items-center justify-center gap-1 ${paymentMethod === 'COD' ? 'border-emerald-500 bg-emerald-50 text-emerald-700 shadow-[inset_0_0_0_2px_#6366f1]' : 'border-slate-100 bg-white text-slate-400 hover:border-emerald-200'}`}>
                                         Cash on Delivery
                                     </button>
-                                    <button type="button" onClick={() => setPaymentMethod('ONLINE')} className={`flex-1 py-4 px-4 rounded-xl border-2 transition-all font-bold flex flex-col items-center justify-center gap-1 ${paymentMethod === 'ONLINE' ? 'border-indigo-500 bg-indigo-50 text-indigo-700 shadow-[inset_0_0_0_2px_#6366f1]' : 'border-slate-100 bg-white text-slate-400 hover:border-indigo-200'}`}>
+                                    <button type="button" onClick={() => setPaymentMethod('ONLINE')} className={`flex-1 py-4 px-4 rounded-xl border-2 transition-all font-bold flex flex-col items-center justify-center gap-1 ${paymentMethod === 'ONLINE' ? 'border-emerald-500 bg-emerald-50 text-emerald-700 shadow-[inset_0_0_0_2px_#6366f1]' : 'border-slate-100 bg-white text-slate-400 hover:border-emerald-200'}`}>
                                         Pay Online
                                     </button>
                                 </div>

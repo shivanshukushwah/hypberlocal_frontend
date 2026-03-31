@@ -107,7 +107,7 @@ const ShopDashboard = () => {
         return (
             <div className="glass p-8 md:p-12 rounded-3xl max-w-2xl mx-auto">
                 <div className="text-center mb-8">
-                    <div className="bg-indigo-100 text-indigo-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="bg-emerald-100 text-emerald-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <Store size={32} />
                     </div>
                     <h3 className="text-3xl font-bold gradient-text">Open Your Digital Store</h3>
@@ -115,11 +115,11 @@ const ShopDashboard = () => {
                 </div>
                 
                 <form onSubmit={handleCreateShop} className="space-y-4">
-                    <input type="text" placeholder="Shop Name" required className="w-full bg-white/50 border border-slate-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-indigo-500 outline-none" onChange={e => setFormData({...formData, shopName: e.target.value})} />
-                    <textarea placeholder="Brief Description (e.g., Men's Premium Wear)" className="w-full bg-white/50 border border-slate-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-indigo-500 outline-none" onChange={e => setFormData({...formData, description: e.target.value})}></textarea>
-                    <input type="text" placeholder="Full Address" required className="w-full bg-white/50 border border-slate-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-indigo-500 outline-none" onChange={e => setFormData({...formData, address: e.target.value})} />
+                    <input type="text" placeholder="Shop Name" required className="w-full bg-white/50 border border-slate-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-emerald-500 outline-none" onChange={e => setFormData({...formData, shopName: e.target.value})} />
+                    <textarea placeholder="Brief Description (e.g., Men's Premium Wear)" className="w-full bg-white/50 border border-slate-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-emerald-500 outline-none" onChange={e => setFormData({...formData, description: e.target.value})}></textarea>
+                    <input type="text" placeholder="Full Address" required className="w-full bg-white/50 border border-slate-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-emerald-500 outline-none" onChange={e => setFormData({...formData, address: e.target.value})} />
                     
-                    <button type="submit" className="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold text-lg hover-scale shadow-lg shadow-indigo-500/30 flex justify-center items-center gap-2 mt-6">
+                    <button type="submit" className="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-blue-500 text-white font-bold text-lg hover-scale shadow-lg shadow-emerald-500/30 flex justify-center items-center gap-2 mt-6">
                         <Plus size={20} /> Launch My Shop
                     </button>
                 </form>
@@ -129,12 +129,12 @@ const ShopDashboard = () => {
 
     return (
         <div className="space-y-6 animate-[fade-in_0.3s_ease-out]">
-            <div className="glass p-8 rounded-3xl border-l-4 border-l-indigo-500 flex justify-between items-center bg-white/60">
+            <div className="glass p-8 rounded-3xl border-l-4 border-l-emerald-500 flex justify-between items-center bg-white/60">
                 <div>
                     <h3 className="text-2xl font-bold text-slate-800">{shop.shopName}</h3>
                     <p className="text-slate-500 text-sm flex items-center gap-1 mt-1"><Store size={14}/> Status: <span className="font-bold text-teal-600">{shop.status}</span></p>
                 </div>
-                <button onClick={() => setShowAddProduct(!showAddProduct)} className="px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-semibold text-sm hover-scale shadow-md flex items-center gap-2">
+                <button onClick={() => setShowAddProduct(!showAddProduct)} className="px-5 py-2.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover-scale shadow-md flex items-center gap-2">
                     {showAddProduct ? <X size={16} /> : <Plus size={16} />} 
                     {showAddProduct ? 'Cancel' : 'Add Product'}
                 </button>
@@ -162,9 +162,9 @@ const ShopDashboard = () => {
                             )}
 
                             {(!productForm.imageUrls || productForm.imageUrls.length < 5) && (
-                                <button type="button" onClick={() => setIsCameraOpen(true)} className="w-full py-10 border-2 border-dashed border-indigo-300 bg-indigo-50/50 hover:bg-indigo-50/80 rounded-2xl flex flex-col items-center justify-center gap-3 text-indigo-500 transition-all hover:border-indigo-400 group">
-                                    <div className="p-4 bg-indigo-100/50 rounded-full group-hover:scale-110 transition-transform">
-                                        <Camera size={38} className="text-indigo-600" />
+                                <button type="button" onClick={() => setIsCameraOpen(true)} className="w-full py-10 border-2 border-dashed border-emerald-300 bg-emerald-50/50 hover:bg-emerald-50/80 rounded-2xl flex flex-col items-center justify-center gap-3 text-emerald-500 transition-all hover:border-emerald-400 group">
+                                    <div className="p-4 bg-emerald-100/50 rounded-full group-hover:scale-110 transition-transform">
+                                        <Camera size={38} className="text-emerald-600" />
                                     </div>
                                     <div className="flex flex-col items-center">
                                         <span className="font-extrabold text-lg text-slate-700">Scan Product Photo ({productForm.imageUrls ? productForm.imageUrls.length : 0}/5)</span>
@@ -175,7 +175,7 @@ const ShopDashboard = () => {
                         </div>
 
                         {/* Standard Details */}
-                        <input type="text" placeholder="Product Name" required className="bg-white border border-slate-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-indigo-500 outline-none font-medium" onChange={e => setProductForm({...productForm, name: e.target.value})} defaultValue={productForm.name} />
+                        <input type="text" placeholder="Product Name" required className="bg-white border border-slate-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-emerald-500 outline-none font-medium" onChange={e => setProductForm({...productForm, name: e.target.value})} defaultValue={productForm.name} />
                         <select className="bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none font-medium" onChange={e => setProductForm({...productForm, category: e.target.value})} defaultValue={productForm.category}>
                             <option value="MEN">Mens Collection</option>
                             <option value="WOMEN">Womens Collection</option>
@@ -185,7 +185,7 @@ const ShopDashboard = () => {
                         <input type="text" placeholder="Sizes Available (e.g. S,M,L)" required className="bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none font-medium" onChange={e => setProductForm({...productForm, sizesAvailable: e.target.value})} defaultValue={productForm.sizesAvailable} />
                         <textarea placeholder="Write a short description..." className="md:col-span-2 bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none font-medium min-h-[100px]" onChange={e => setProductForm({...productForm, description: e.target.value})} defaultValue={productForm.description}></textarea>
                         
-                        <button type="submit" disabled={!productForm.imageUrls || productForm.imageUrls.length === 0} className="md:col-span-2 py-4 rounded-xl bg-indigo-600 text-white font-bold text-lg hover:bg-indigo-700 transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button type="submit" disabled={!productForm.imageUrls || productForm.imageUrls.length === 0} className="md:col-span-2 py-4 rounded-xl bg-emerald-600 text-white font-bold text-lg hover:bg-emerald-700 transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
                             Publish Listing
                         </button>
                     </form>
@@ -246,7 +246,7 @@ const ShopDashboard = () => {
                  {/* Product Inventory List */}
                  <div className="lg:col-span-2 glass p-8 rounded-3xl min-h-[300px]">
                     <div className="flex items-center gap-2 mb-6">
-                        <Package className="text-indigo-500" size={24} />
+                        <Package className="text-emerald-500" size={24} />
                         <h4 className="text-xl font-bold text-slate-700">Inventory ({products.length})</h4>
                     </div>
                     {products.length === 0 ? (
@@ -269,9 +269,9 @@ const ShopDashboard = () => {
                  </div>
 
                  {/* Live Orders View */}
-                 <div className="glass p-8 rounded-3xl min-h-[300px] border border-dashed border-indigo-200">
+                 <div className="glass p-8 rounded-3xl min-h-[300px] border border-dashed border-emerald-200">
                     <div className="flex items-center gap-2 mb-6">
-                        <ShoppingBag className="text-indigo-500" size={24} />
+                        <ShoppingBag className="text-emerald-500" size={24} />
                         <h4 className="text-xl font-bold text-slate-700">Live Orders ({orders.length})</h4>
                     </div>
                     {orders.length === 0 ? (
@@ -288,7 +288,7 @@ const ShopDashboard = () => {
                                         <select 
                                             value={order.status}
                                             onChange={(e) => updateOrderStatus(order._id, e.target.value)}
-                                            className="bg-indigo-50 text-indigo-700 border-none rounded-lg text-xs font-bold py-1.5 px-2 focus:ring-0 cursor-pointer shadow-sm"
+                                            className="bg-emerald-50 text-emerald-700 border-none rounded-lg text-xs font-bold py-1.5 px-2 focus:ring-0 cursor-pointer shadow-sm"
                                         >
                                             <option value="PLACED">Placed</option>
                                             <option value="PREPARING">Preparing</option>

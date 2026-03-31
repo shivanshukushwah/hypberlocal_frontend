@@ -10,11 +10,11 @@ export default {
         sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
       },
       colors: {
-        indigo: {
-          950: '#05051a',
+        dark: {
+          950: '#050811',
         },
-        violet: {
-          950: '#0a0a22',
+        emerald: {
+          950: '#022c22',
         }
       },
       animation: {
