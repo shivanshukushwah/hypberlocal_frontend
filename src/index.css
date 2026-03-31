@@ -24,28 +24,50 @@
   .glass {
     @apply bg-white/5 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)];
   }
+  .glass-card {
+    @apply bg-[#0D111C]/60 backdrop-blur-3xl border border-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500;
+  }
   .glass-emerald {
-    @apply bg-emerald-500/10 backdrop-blur-xl border border-emerald-500/20 shadow-lg shadow-emerald-500/10;
+    @apply bg-emerald-500/10 backdrop-blur-xl border border-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.15)];
+  }
+  .glass-input {
+    @apply bg-white/[0.03] border border-white/10 hover:border-emerald-500/30 focus-within:border-emerald-500/50 focus-within:ring-4 focus-within:ring-emerald-500/10 transition-all duration-300 rounded-[1.25rem] overflow-hidden;
   }
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 font-extrabold;
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-emerald-400 font-extrabold;
   }
   .btn-primary {
-    @apply bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 px-6 rounded-2xl transition-all duration-300 shadow-lg shadow-emerald-500/25 active:scale-95;
+    @apply relative overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 hover:scale-[1.02] active:scale-[0.98] text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 shadow-[0_10px_30px_rgba(16,185,129,0.3)];
+  }
+  .btn-primary::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full hover:animate-[shimmer_1.5s_infinite];
   }
   .input-field {
-    @apply w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500/50 transition-all duration-300 backdrop-blur-md;
+    @apply w-full bg-transparent py-4 px-5 text-white placeholder:text-slate-500 focus:outline-none transition-all duration-300;
   }
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
 }
 
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(1deg); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
 }
 
 .animate-float {
-  animation: float 4s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
 }
 
 /* Custom Scrollbar */

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { UserPlus, Mail, Lock, User, Phone, MapPin, Globe, Map, Sparkles, ArrowRight } from 'lucide-react';
+import { UserPlus, Mail, Lock, User, Phone, MapPin, Globe, Map, Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
 
 const Register = () => {
     const location = useLocation();
@@ -37,126 +37,158 @@ const Register = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-[100vh] w-full px-4 py-12 relative overflow-hidden">
-             {/* Background decorative elements */}
-             <div className="absolute top-1/4 -right-20 w-96 h-96 bg-emerald-600/10 rounded-full blur-[120px] animate-pulse"></div>
-             <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-teal-600/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="flex items-center justify-center min-h-[100vh] w-full px-4 py-20 relative overflow-hidden bg-[#050811]">
+             {/* Premium Background Decorative Elements */}
+             <div className="absolute top-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-emerald-600/10 rounded-full blur-[120px] animate-pulse-slow"></div>
+             <div className="absolute bottom-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-teal-600/10 rounded-full blur-[120px] animate-pulse-slow" style={{ animationDelay: '-3s' }}></div>
 
-            <div className="glass w-full max-w-2xl p-8 sm:p-12 rounded-[3rem] relative z-10 animate-float">
-                <div className="text-center mb-12">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 mb-6 text-emerald-400">
-                        <Sparkles size={32} />
+            <div className="w-full max-w-3xl relative z-10">
+                <div className="text-center mb-12 animate-[fade-in-down_0.8s_ease-out]">
+                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-emerald-500/10 border border-emerald-500/20 mb-8 shadow-inner rotate-[-6deg] transition-transform hover:rotate-0 duration-500">
+                        <Sparkles size={40} className="text-emerald-400 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                     </div>
-                    <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-4">
-                        Join the <span className="gradient-text">Network.</span>
+                    <h2 className="text-5xl sm:text-6xl font-black tracking-tight leading-none mb-4 text-white">
+                        Create <br /> <span className="gradient-text">Identity.</span>
                     </h2>
-                    <p className="text-slate-400 font-medium tracking-wide max-w-md mx-auto">Start your journey with HyperLocal commerce today.</p>
+                    <p className="text-slate-400 font-medium tracking-wide opacity-80 max-w-md mx-auto">Initializing your HyperLocal nodes...</p>
                 </div>
                 
-                {error && (
-                    <div className="bg-rose-500/10 border border-rose-500/20 text-rose-400 px-6 py-4 rounded-2xl mb-10 text-sm font-semibold flex items-center gap-3 animate-shake">
-                        <div className="w-2 h-2 rounded-full bg-rose-500"></div>
-                        {error}
-                    </div>
-                )}
+                <div className="glass-card p-10 sm:p-14 rounded-[4rem] animate-float relative group">
+                    {/* Inner glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent rounded-[4rem] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 
-                <form onSubmit={handleRegister} className="space-y-8">
-                     {/* Role Selection */}
-                    <div className="bg-white/5 p-2 rounded-2xl border border-white/10 flex gap-2 mb-4 backdrop-blur-md">
-                        {['CUSTOMER', 'SHOPKEEPER', 'DELIVERY'].map(role => (
-                            <button 
-                                key={role} 
-                                type="button" 
-                                onClick={() => setFormData({...formData, role})}
-                                className={`flex-1 py-3.5 text-xs font-bold rounded-xl transition-all duration-300 uppercase tracking-widest ${formData.role === role ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-500/25' : 'text-slate-400 hover:bg-white/5'}`}
-                            >
-                                {role}
-                            </button>
-                        ))}
-                    </div>
+                    {error && (
+                        <div className="bg-rose-500/10 border border-rose-500/20 text-rose-400 px-6 py-4 rounded-2xl mb-10 text-sm font-semibold flex items-center gap-3 animate-[shake_0.5s_ease-in-out]">
+                            <div className="w-2 h-2 rounded-full bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]"></div>
+                            {error}
+                        </div>
+                    )}
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2 group">
-                            <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Full Name</label>
-                            <div className="relative">
-                                <User className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
-                                <input type="text" name="name" required placeholder="Full Name" className="input-field pl-14 h-14" onChange={handleChange} />
+                    <form onSubmit={handleRegister} className="space-y-10">
+                        {/* Role Selection - Segment Control Style */}
+                        <div className="space-y-4">
+                            <label className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 ml-1 opacity-70 text-center block">Access Authority</label>
+                            <div className="bg-white/[0.03] p-1.5 rounded-2xl border border-white/5 flex gap-1 relative overflow-hidden max-w-lg mx-auto">
+                                {['CUSTOMER', 'SHOPKEEPER', 'DELIVERY'].map(role => (
+                                    <button 
+                                        key={role} 
+                                        type="button" 
+                                        onClick={() => setFormData({...formData, role})}
+                                        className={`flex-1 py-4 text-[10px] font-black rounded-xl transition-all duration-500 uppercase tracking-widest relative z-10 ${formData.role === role ? 'text-white' : 'text-slate-500 hover:text-slate-300'}`}
+                                    >
+                                        {role}
+                                        {formData.role === role && (
+                                            <div className="absolute inset-0 bg-emerald-600/80 rounded-xl -z-10 shadow-lg shadow-emerald-600/20 animate-[scale-in_0.3s_ease-out]"></div>
+                                        )}
+                                    </button>
+                                ))}
                             </div>
                         </div>
-                        <div className="space-y-2 group">
-                            <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Mobile Number</label>
-                            <div className="relative">
-                                <Phone className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
-                                <input type="text" name="phone" required placeholder="+91 00000 00000" className="input-field pl-14 h-14" onChange={handleChange} />
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div className="space-y-3 group">
+                                <label className="text-[10px] font-black uppercase tracking-[0.35em] text-slate-500 ml-1 opacity-70">Legal Name</label>
+                                <div className="glass-input">
+                                    <div className="flex items-center px-5 h-16">
+                                        <User className="text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={20} />
+                                        <input type="text" name="name" required placeholder="Full Name" className="input-field" onChange={handleChange} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="space-y-3 group">
+                                <label className="text-[10px] font-black uppercase tracking-[0.35em] text-slate-500 ml-1 opacity-70">Link Terminal (Phone)</label>
+                                <div className="glass-input">
+                                    <div className="flex items-center px-5 h-16">
+                                        <Phone className="text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={20} />
+                                        <input type="text" name="phone" required placeholder="+91 00000 00000" className="input-field" onChange={handleChange} />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2 group">
-                            <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Country</label>
-                            <div className="relative">
-                                <Globe className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
-                                <input type="text" name="country" required placeholder="India" value={formData.country} className="input-field pl-14 h-14" onChange={handleChange} />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div className="space-y-3 group">
+                                <label className="text-[10px] font-black uppercase tracking-[0.35em] text-slate-500 ml-1 opacity-70">Region (Country)</label>
+                                <div className="glass-input">
+                                    <div className="flex items-center px-5 h-16">
+                                        <Globe className="text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={20} />
+                                        <input type="text" name="country" required placeholder="India" value={formData.country} className="input-field" onChange={handleChange} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="space-y-3 group">
+                                <label className="text-[10px] font-black uppercase tracking-[0.35em] text-slate-500 ml-1 opacity-70">Sector (State)</label>
+                                <div className="glass-input">
+                                    <div className="flex items-center px-5 h-16">
+                                        <Map className="text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={20} />
+                                        <input type="text" name="state" required placeholder="State" className="input-field" onChange={handleChange} />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="space-y-2 group">
-                            <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">State</label>
-                            <div className="relative">
-                                <Map className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
-                                <input type="text" name="state" required placeholder="State" className="input-field pl-14 h-14" onChange={handleChange} />
+
+                        <div className="space-y-3 group">
+                            <label className="text-[10px] font-black uppercase tracking-[0.35em] text-slate-500 ml-1 opacity-70">Geographic Coordinates (Address)</label>
+                            <div className="glass-input">
+                                <div className="flex items-center px-5 h-16">
+                                    <MapPin className="text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={20} />
+                                    <input type="text" name="address" required placeholder="House No, Street, Landmark" className="input-field" onChange={handleChange} />
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div className="space-y-2 group">
-                        <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Complete Address</label>
-                        <div className="relative">
-                            <MapPin className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
-                            <input type="text" name="address" required placeholder="House No, Street, Landmark" className="input-field pl-14 h-14" onChange={handleChange} />
-                        </div>
-                    </div>
-
-                    <div className="space-y-2 group">
-                        <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Account Email</label>
-                        <div className="relative">
-                            <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
-                            <input type="email" name="email" required placeholder="your@email.com" value={formData.email} className="input-field pl-14 h-14" onChange={handleChange} />
-                        </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2 group">
-                            <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Security Password</label>
-                            <div className="relative">
-                                <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
-                                <input type="password" name="password" required placeholder="••••••••" className="input-field pl-14 h-14" onChange={handleChange} />
+                        <div className="space-y-3 group">
+                            <label className="text-[10px] font-black uppercase tracking-[0.35em] text-slate-500 ml-1 opacity-70">Node Address (Email)</label>
+                            <div className="glass-input">
+                                <div className="flex items-center px-5 h-16">
+                                    <Mail className="text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={20} />
+                                    <input type="email" name="email" required placeholder="user@hyperlocal.net" value={formData.email} className="input-field" onChange={handleChange} />
+                                </div>
                             </div>
                         </div>
-                        <div className="space-y-2 group">
-                            <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Confirm Password</label>
-                            <div className="relative">
-                                <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
-                                <input type="password" name="confirmPassword" required placeholder="••••••••" className="input-field pl-14 h-14" onChange={handleChange} />
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div className="space-y-3 group">
+                                <label className="text-[10px] font-black uppercase tracking-[0.35em] text-slate-500 ml-1 opacity-70">Access Token (Password)</label>
+                                <div className="glass-input">
+                                    <div className="flex items-center px-5 h-16">
+                                        <Lock className="text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={20} />
+                                        <input type="password" name="password" required placeholder="••••••••" className="input-field" onChange={handleChange} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="space-y-3 group">
+                                <label className="text-[10px] font-black uppercase tracking-[0.35em] text-slate-500 ml-1 opacity-70">Authorize Token</label>
+                                <div className="glass-input">
+                                    <div className="flex items-center px-5 h-16">
+                                        <ShieldCheck className="text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={20} />
+                                        <input type="password" name="confirmPassword" required placeholder="••••••••" className="input-field" onChange={handleChange} />
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <button 
+                            type="submit" 
+                            disabled={loading}
+                            className="btn-primary w-full mt-6 py-6 text-xl flex items-center justify-center gap-6 group drop-shadow-emerald"
+                        >
+                            <span className="font-black uppercase tracking-[0.2em] text-sm sm:text-base">
+                                {loading ? 'Initializing...' : 'Confirm Registration'}
+                            </span>
+                            {!loading && <ArrowRight size={24} className="group-hover:translate-x-3 transition-transform duration-300" /> }
+                        </button>
+                    </form>
+
+                    <div className="mt-14 pt-12 border-t border-white/10 text-center">
+                        <p className="text-slate-500 text-xs font-bold uppercase tracking-[0.2em]">
+                            Existing Entity? 
+                            <Link to="/login" className="text-emerald-400 hover:text-emerald-300 font-black ml-4 transition-all inline-flex items-center gap-2 group/link">
+                                Access Account
+                                <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                            </Link>
+                        </p>
                     </div>
-
-                    <button 
-                        type="submit" 
-                        disabled={loading}
-                        className="btn-primary w-full py-5 text-xl flex items-center justify-center gap-4 mt-6 disabled:opacity-50 group"
-                    >
-                        {loading ? 'Creating Account...' : 'Get Started'}
-                        {!loading && <ArrowRight size={24} className="group-hover:translate-x-1.5 transition-transform" /> }
-                    </button>
-                </form>
-
-                <div className="mt-12 pt-10 border-t border-white/5 text-center">
-                    <p className="text-slate-400 font-medium">
-                        Already a member? 
-                        <Link to="/login" className="text-emerald-400 hover:text-emerald-300 font-bold ml-2 transition-colors">Sign in here</Link>
-                    </p>
                 </div>
             </div>
         </div>
