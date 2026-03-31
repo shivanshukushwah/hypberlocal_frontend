@@ -6,8 +6,8 @@ import { UserPlus, Mail, Lock, User, Phone, MapPin, Globe, Map, Sparkles, ArrowR
 const Register = () => {
     const location = useLocation();
     const [formData, setFormData] = useState({ 
-        name: '', email: location.state?.email || '', password: '', phone: '', 
-        country: '', state: '', address: '', role: 'CUSTOMER'
+        name: '', email: location.state?.email || '', password: '', confirmPassword: '', phone: '', 
+        country: 'India', state: '', address: '', role: 'CUSTOMER'
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -18,6 +18,11 @@ const Register = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         setError('');
+
+        if (formData.password !== formData.confirmPassword) {
+            return setError('Passwords do not match');
+        }
+
         setLoading(true);
         try {
             const res = await axios.post('https://hypberlocal-backend.onrender.com/api/auth/register', formData);
@@ -92,7 +97,7 @@ const Register = () => {
                             <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Country</label>
                             <div className="relative">
                                 <Globe className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
-                                <input type="text" name="country" required placeholder="India" className="input-field pl-14 h-14" onChange={handleChange} />
+                                <input type="text" name="country" required placeholder="India" value={formData.country} className="input-field pl-14 h-14" onChange={handleChange} />
                             </div>
                         </div>
                         <div className="space-y-2 group">
@@ -120,11 +125,20 @@ const Register = () => {
                         </div>
                     </div>
 
-                    <div className="space-y-2 group">
-                        <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Security Password</label>
-                        <div className="relative">
-                            <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
-                            <input type="password" name="password" required placeholder="••••••••" className="input-field pl-14 h-14" onChange={handleChange} />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2 group">
+                            <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Security Password</label>
+                            <div className="relative">
+                                <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
+                                <input type="password" name="password" required placeholder="••••••••" className="input-field pl-14 h-14" onChange={handleChange} />
+                            </div>
+                        </div>
+                        <div className="space-y-2 group">
+                            <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Confirm Password</label>
+                            <div className="relative">
+                                <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-400 transition-colors" size={18} />
+                                <input type="password" name="confirmPassword" required placeholder="••••••••" className="input-field pl-14 h-14" onChange={handleChange} />
+                            </div>
                         </div>
                     </div>
 

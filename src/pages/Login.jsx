@@ -7,6 +7,7 @@ const Login = () => {
     const location = useLocation();
     const [email, setEmail] = useState(location.state?.email || '');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState('CUSTOMER');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -18,14 +19,15 @@ const Login = () => {
         try {
             const res = await axios.post('https://hypberlocal-backend.onrender.com/api/auth/login', { 
                 email, 
-                password 
+                password,
+                role
             });
 
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('user', JSON.stringify(res.data.user));
             navigate('/');
         } catch (err) {
-            setError(err.response?.data?.message || 'Invalid email or password');
+            setError(err.response?.data?.message || 'Invalid credentials');
         } finally {
             setLoading(false);
         }
@@ -56,6 +58,20 @@ const Login = () => {
                 )}
 
                 <form onSubmit={handleLogin} className="space-y-6">
+                    {/* Role Selection */}
+                    <div className="bg-white/5 p-1.5 rounded-2xl border border-white/10 flex gap-1 mb-8">
+                        {['CUSTOMER', 'SHOPKEEPER', 'DELIVERY'].map(r => (
+                            <button 
+                                key={r} 
+                                type="button" 
+                                onClick={() => setRole(r)}
+                                className={`flex-1 py-3 text-[10px] font-black rounded-xl transition-all duration-300 uppercase tracking-[0.2em] ${role === r ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-500/20' : 'text-slate-400 hover:bg-white/5'}`}
+                            >
+                                {r}
+                            </button>
+                        ))}
+                    </div>
+
                     <div className="space-y-2">
                         <label className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Email Address</label>
                         <div className="relative group">
