@@ -34,41 +34,49 @@ const CustomerFeed = () => {
         }
     }, []);
 
-    if (loading) return <div className="text-center p-12 animate-pulse text-teal-600 font-bold">Scanning your area for shops...</div>;
+    if (loading) return (
+        <div className="flex flex-col items-center justify-center p-12 space-y-4">
+            <div className="w-12 h-12 border-4 border-indigo-100 border-t-indigo-600 rounded-full animate-spin"></div>
+            <div className="text-center animate-pulse text-indigo-600 font-black uppercase tracking-widest text-xs">Finding local shops...</div>
+        </div>
+    );
 
     return (
         <div className="w-full">
-            <div className="flex justify-between items-center mb-4 sm:mb-6">
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-800 flex items-center gap-2">
-                    <MapPin className="text-rose-500" size={20} sm:size={24} /> Nearby Boutiques
+            <div className="flex justify-between items-center mb-6 sm:mb-8">
+                <h3 className="text-xl sm:text-2xl font-black text-slate-800 flex items-center gap-2 tracking-tight">
+                    <MapPin className="text-indigo-600" size={20} sm:size={24} /> Nearby Boutiques
                 </h3>
             </div>
             
             {shops.length === 0 ? (
-                <div className="glass p-8 sm:p-12 text-center rounded-2xl sm:rounded-3xl border border-teal-100 flex flex-col items-center">
-                    <Navigation size={40} sm:size={48} className="text-slate-300 mb-4" />
+                <div className="glass p-8 sm:p-12 text-center rounded-[2rem] border border-indigo-50 flex flex-col items-center shadow-inner">
+                    <div className="p-4 bg-slate-50 rounded-full mb-4">
+                        <Navigation size={40} sm:size={48} className="text-slate-300" />
+                    </div>
                     <h4 className="text-lg sm:text-xl font-bold text-slate-700 mb-2">No shops found here yet.</h4>
                     <p className="text-sm sm:text-base text-slate-500 max-w-md">Our network is growing! Check back soon or try expanding your search radius.</p>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {shops.map(shop => (
-                        <Link key={shop._id} to={`/shop/${shop._id}`} className="glass rounded-2xl sm:rounded-3xl overflow-hidden hover-scale cursor-pointer group block">
-                            <div className="h-32 sm:h-40 bg-gradient-to-br from-teal-400 to-blue-500 relative flex items-center justify-center">
-                                {/* Placeholder for shop cover photo */}
-                                <ShoppingBag className="text-white/30" size={48} sm:size={64} />
-                                <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/90 backdrop-blur rounded-full px-2.5 sm:px-3 py-1 text-[10px] sm:text-xs font-bold text-teal-700 flex items-center gap-1 shadow-sm">
-                                    <Star size={12} sm:size={14} className="text-yellow-500 fill-yellow-500" /> 4.8
+                        <Link key={shop._id} to={`/shop/${shop._id}`} className="glass rounded-[2rem] overflow-hidden hover-scale cursor-pointer group block border border-transparent hover:border-indigo-100 transition-all">
+                            <div className="h-40 sm:h-48 bg-gradient-to-br from-indigo-50 to-indigo-100 relative flex items-center justify-center overflow-hidden">
+                                {/* Decorative shape behind icon */}
+                                <div className="absolute inset-0 bg-indigo-600/5 origin-bottom-left -rotate-12 transform scale-150"></div>
+                                <ShoppingBag className="text-indigo-200/50 group-hover:scale-110 transition-transform duration-500" size={48} sm:size={64} />
+                                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur rounded-full px-3 py-1.5 text-[10px] sm:text-xs font-black text-indigo-700 flex items-center gap-1.5 shadow-sm border border-indigo-50">
+                                    <Star size={12} sm:size={14} className="text-amber-500 fill-amber-500" /> 4.8
                                 </div>
                             </div>
-                            <div className="p-4 sm:p-6">
-                                <h4 className="text-lg sm:text-xl font-bold text-slate-800 mb-1 group-hover:text-teal-600 transition-colors truncate">{shop.shopName}</h4>
-                                <p className="text-slate-500 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2 leading-relaxed">{shop.description || "A local clothing store offering premium quality apparel."}</p>
-                                <div className="flex items-center justify-between mt-auto">
-                                    <span className="text-[10px] sm:text-xs font-semibold text-slate-400 flex items-center gap-1 truncate max-w-[70%]">
-                                        <MapPin size={12} sm:size={14} className="flex-shrink-0" /> {shop.address}
+                            <div className="p-5 sm:p-8">
+                                <h4 className="text-lg sm:text-xl font-black text-slate-800 mb-2 group-hover:text-indigo-600 transition-colors truncate tracking-tight">{shop.shopName}</h4>
+                                <p className="text-slate-500 text-xs sm:text-sm mb-4 sm:mb-6 line-clamp-2 leading-relaxed font-medium">{shop.description || "A local clothing store offering premium quality apparel."}</p>
+                                <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-50">
+                                    <span className="text-[10px] sm:text-xs font-bold text-slate-400 flex items-center gap-1.5 truncate max-w-[70%]">
+                                        <MapPin size={12} sm:size={14} className="flex-shrink-0 text-indigo-400" /> {shop.address}
                                     </span>
-                                    <span className="text-teal-500 p-1.5 sm:p-2 rounded-full bg-teal-50 group-hover:bg-teal-100 transition-colors">
+                                    <span className="text-indigo-600 p-2 sm:p-2.5 rounded-full bg-indigo-50 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm group-hover:shadow-indigo-200">
                                         <ArrowRight size={16} sm:size={18} />
                                     </span>
                                 </div>

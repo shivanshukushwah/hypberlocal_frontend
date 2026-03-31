@@ -1,36 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --primary: 99, 102, 241;
+    --secondary: 139, 92, 246;
+    --accent: 236, 72, 153;
+  }
+  
   body {
-    @apply bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden;
+    @apply bg-[#020617] text-slate-200 font-sans antialiased overflow-x-hidden;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+    min-height: 100vh;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-lg;
+    @apply bg-white/5 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
   }
-  .glass-dark {
-    @apply bg-slate-900/80 backdrop-blur-lg border border-slate-700/50 shadow-xl text-white;
+  .glass-indigo {
+    @apply bg-indigo-500/10 backdrop-blur-xl border border-indigo-500/20 shadow-lg shadow-indigo-500/10;
   }
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-blue-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-violet-400 to-fuchsia-400 font-black;
   }
-  .hover-scale {
-    @apply transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl active:translate-y-0 active:shadow-md;
+  .btn-primary {
+    @apply bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold py-3 px-6 rounded-2xl transition-all duration-300 shadow-lg shadow-indigo-500/25 active:scale-95;
+  }
+  .input-field {
+    @apply w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500/50 transition-all duration-300 backdrop-blur-md;
   }
 }
 
-@keyframes scan-laser {
-  0% { top: 0%; opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }
-.scanner-laser {
-  animation: scan-laser 2s ease-in-out infinite alternate;
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-indigo-500/20 rounded-full hover:bg-indigo-500/40 transition-colors;
 }

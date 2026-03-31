@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingBag, User, LogOut, ShoppingCart } from 'lucide-react';
+import { ShoppingBag, User, LogOut, ShoppingCart, Wallet } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
@@ -16,45 +16,48 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="glass sticky top-0 z-50 px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center w-full">
-            <Link to="/" className="text-xl sm:text-2xl font-bold gradient-text flex items-center gap-1.5 sm:gap-2">
-                <ShoppingBag className="text-teal-500" strokeWidth={2.5} size={24} sm:size={28} /> 
-                <span className="tracking-tight">HyperLocal</span>
-            </Link>
-
-            <div className="flex items-center gap-3 sm:gap-6">
-                <Link to="/cart" className="relative flex items-center p-2 text-slate-500 hover:text-teal-600 transition-colors">
-                    <ShoppingCart size={22} sm:size={24} />
-                    {cart.items.length > 0 && (
-                        <span className="absolute top-0.5 right-0.5 bg-rose-500 text-white text-[9px] font-bold w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center shadow">
-                            {cart.items.reduce((sum, item) => sum + item.quantity, 0)}
-                        </span>
-                    )}
+        <nav className="sticky top-0 z-50 glass border-b border-indigo-100/50 backdrop-blur-md">
+            <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
+                <Link to="/" className="flex items-center gap-2 group">
+                    <div className="p-1.5 sm:p-2 bg-gradient-to-br from-indigo-600 to-violet-700 rounded-xl shadow-lg shadow-indigo-200 active:scale-95 transition-transform">
+                        <ShoppingBag className="text-white w-5 h-5 sm:w-6 sm:h-6" />
+                    </div>
+                    <h1 className="text-xl sm:text-2xl font-black gradient-text tracking-tighter">
+                        HyperLocal
+                    </h1>
                 </Link>
-                {token ? (
-                    <>
-                        {user?.role === 'CUSTOMER' && (
-                            <Link to="/orders" className="text-xs sm:text-sm font-bold text-slate-600 hover:text-teal-600 transition-colors">Orders</Link>
+
+                <div className="flex items-center gap-2 sm:gap-6">
+                    <Link to="/cart" className="p-2 sm:p-2.5 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all relative group active:scale-90">
+                        <ShoppingCart size={22} className="sm:w-6 sm:h-6" />
+                        {cart.items.length > 0 && (
+                            <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-[10px] font-black h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center rounded-full shadow-md shadow-amber-200 border-2 border-white">
+                                {cart.items.reduce((sum, item) => sum + item.quantity, 0)}
+                            </span>
                         )}
-                        <div className="flex flex-col items-end">
-                            <Link to="/profile" className="text-xs sm:text-sm font-bold text-slate-800 hover:text-teal-600 transition-colors line-clamp-1 max-w-[80px] sm:max-w-none">
-                                {user?.name.split(' ')[0] || 'Profile'}
+                    </Link>
+
+                    {token ? (
+                        <div className="flex items-center gap-2 sm:gap-4 ml-1 sm:ml-0">
+                            <Link to="/wallet" className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all relative group active:scale-90">
+                                <Wallet size={22} className="sm:w-6 sm:h-6" />
                             </Link>
-                            <span className="text-[10px] sm:text-xs font-semibold text-teal-600 bg-teal-50 px-1.5 sm:px-2 py-0.5 rounded shadow-sm border border-teal-100 uppercase">{user?.role || 'USER'}</span>
+                            <Link to="/profile" className="flex items-center gap-2 p-1 sm:p-1.5 pr-2 sm:pr-4 rounded-full bg-slate-50 border border-slate-100 hover:border-indigo-200 transition-all group active:scale-95">
+                                <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-indigo-100 to-violet-50 flex items-center justify-center text-indigo-600 shadow-inner group-hover:from-indigo-600 group-hover:to-violet-700 group-hover:text-white transition-all">
+                                    <User size={18} />
+                                </div>
+                                <span className="hidden sm:inline font-bold text-slate-700 text-sm group-hover:text-indigo-600 transition-colors uppercase tracking-wider">{user?.name.split(' ')[0]}</span>
+                            </Link>
+                            <button onClick={handleLogout} className="p-2 text-slate-400 hover:text-rose-500 transition-colors active:scale-90">
+                                <LogOut size={20} />
+                            </button>
                         </div>
-                        <button onClick={handleLogout} className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-500 hover:text-rose-500 transition-colors ml-1 sm:ml-2">
-                            <LogOut size={16} sm:size={18} /> <span className="hidden xs:inline">Logout</span>
-                        </button>
-                    </>
-                ) : (
-                    <>
-                        <Link to="/login" className="text-xs sm:text-sm font-semibold text-slate-600 hover:text-teal-600 transition-colors">Sign In</Link>
-                        <Link to="/register" className="px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-teal-500 to-blue-500 text-white text-xs sm:text-sm font-semibold hover-scale shadow-lg shadow-teal-500/30 flex items-center gap-1.5 sm:gap-2">
-                            <User size={14} sm:size={16} /> <span className="hidden sm:inline">Get Started</span>
-                            <span className="sm:hidden">Join</span>
+                    ) : (
+                        <Link to="/login" className="px-5 sm:px-7 py-2 sm:py-2.5 rounded-full bg-indigo-600 text-white font-black text-xs sm:text-sm hover:bg-indigo-700 shadow-lg shadow-indigo-100 active:scale-95 transition-all uppercase tracking-widest">
+                            Join
                         </Link>
-                    </>
-                )}
+                    )}
+                </div>
             </div>
         </nav>
     );

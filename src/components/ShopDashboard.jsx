@@ -10,7 +10,7 @@ const ShopDashboard = () => {
     const [loading, setLoading] = useState(true);
     const [showAddProduct, setShowAddProduct] = useState(false);
     const [formData, setFormData] = useState({ shopName: '', description: '', address: '', latitude: '28.6139', longitude: '77.2090' });
-    const [productForm, setProductForm] = useState({ name: '', category: 'MEN', price: '', description: '', sizesAvailable: 'S,M,L,XL', imageUrl: '' });
+    const [productForm, setProductForm] = useState({ name: '', category: 'MEN', price: '', description: '', sizesAvailable: 'S,M,L,XL', imageUrls: [] });
     
     // Smart Scanner States
     const [isCameraOpen, setIsCameraOpen] = useState(false);
@@ -20,12 +20,12 @@ const ShopDashboard = () => {
     const fetchShopAndProducts = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/shops/my-shop', {
+            const res = await axios.get('https://hypberlocal-backend.onrender.com/api/shops/my-shop', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setShop(res.data);
             
-            const prodRes = await axios.get(`http://localhost:5000/api/products?shopId=${res.data._id}`);
+            const prodRes = await axios.get(`https://hypberlocal-backend.onrender.com/api/products?shopId=${res.data._id}`);
             setProducts(prodRes.data);
             
             const ordersRes = await axios.get('https://hypberlocal-backend.onrender.com/api/orders', {
@@ -59,7 +59,7 @@ const ShopDashboard = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:5000/api/shops', formData, {
+            await axios.post('https://hypberlocal-backend.onrender.com/api/shops', formData, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             fetchShopAndProducts();
@@ -74,7 +74,10 @@ const ShopDashboard = () => {
         // Simulate deep smart scanning animation delay
         setTimeout(() => {
             const imageSrc = webcamRef.current.getScreenshot();
-            setProductForm(prev => ({ ...prev, imageUrl: imageSrc }));
+            setProductForm(prev => ({ 
+                ...prev, 
+                imageUrls: [...(prev.imageUrls || []), imageSrc].slice(0, 5) 
+            }));
             setIsScanning(false);
             setIsCameraOpen(false);
         }, 1800);
@@ -84,14 +87,14 @@ const ShopDashboard = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:5000/api/products', {
+            await axios.post('https://hypberlocal-backend.onrender.com/api/products', {
                 ...productForm,
                 sizesAvailable: productForm.sizesAvailable.split(',')
             }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setShowAddProduct(false);
-            setProductForm({ name: '', category: 'MEN', price: '', description: '', sizesAvailable: 'S,M,L,XL', imageUrl: '' });
+            setProductForm({ name: '', category: 'MEN', price: '', description: '', sizesAvailable: 'S,M,L,XL', imageUrls: [] });
             fetchShopAndProducts(); 
         } catch (error) {
             alert('Failed to add product');
@@ -145,20 +148,27 @@ const ShopDashboard = () => {
                         
                         {/* Smart Scanner Button Area */}
                         <div className="md:col-span-2 mb-2">
-                            {productForm.imageUrl ? (
-                                <div className="relative w-full h-56 rounded-2xl overflow-hidden border-2 border-teal-400 shadow-[0_0_20px_rgba(45,212,191,0.2)]">
-                                    <img src={productForm.imageUrl} alt="Scanned Product" className="w-full h-full object-contain bg-slate-100" />
-                                    <div className="absolute top-2 right-2 bg-teal-500 text-white p-1.5 flex items-center gap-1 rounded-full text-xs font-bold shadow"><CheckCircle2 size={16} /> Scanned</div>
-                                    <button type="button" onClick={() => setProductForm({...productForm, imageUrl: ''})} className="absolute bottom-3 right-3 bg-slate-900/80 backdrop-blur text-white px-4 py-2 rounded-xl text-sm font-bold shadow hover:bg-rose-500 transition-colors">Retake / Rescan</button>
+                            {productForm.imageUrls && productForm.imageUrls.length > 0 && (
+                                <div className="flex gap-4 mb-4 overflow-x-auto pb-2 px-1">
+                                    {productForm.imageUrls.map((img, idx) => (
+                                        <div key={idx} className="relative w-28 h-28 rounded-2xl overflow-hidden border-2 border-teal-400 shrink-0 shadow-sm transition-transform hover:scale-105">
+                                            <img src={img} alt="Scanned Product" className="w-full h-full object-cover bg-slate-100" />
+                                            <button type="button" onClick={() => setProductForm(prev => ({...prev, imageUrls: prev.imageUrls.filter((_, i) => i !== idx)}))} className="absolute top-1 right-1 bg-slate-900/80 backdrop-blur text-white p-1.5 rounded-full shadow hover:bg-rose-500 transition-colors">
+                                                <X size={14} />
+                                            </button>
+                                        </div>
+                                    ))}
                                 </div>
-                            ) : (
+                            )}
+
+                            {(!productForm.imageUrls || productForm.imageUrls.length < 5) && (
                                 <button type="button" onClick={() => setIsCameraOpen(true)} className="w-full py-10 border-2 border-dashed border-indigo-300 bg-indigo-50/50 hover:bg-indigo-50/80 rounded-2xl flex flex-col items-center justify-center gap-3 text-indigo-500 transition-all hover:border-indigo-400 group">
                                     <div className="p-4 bg-indigo-100/50 rounded-full group-hover:scale-110 transition-transform">
                                         <Camera size={38} className="text-indigo-600" />
                                     </div>
                                     <div className="flex flex-col items-center">
-                                        <span className="font-extrabold text-lg text-slate-700">Open Smart Scanner</span>
-                                        <span className="text-sm text-slate-500 font-medium mt-1">Capture a photo or short video to auto-scan items.</span>
+                                        <span className="font-extrabold text-lg text-slate-700">Scan Product Photo ({productForm.imageUrls ? productForm.imageUrls.length : 0}/5)</span>
+                                        <span className="text-sm text-slate-500 font-medium mt-1">Capture up to {5 - (productForm.imageUrls?.length || 0)} more photos.</span>
                                     </div>
                                 </button>
                             )}
@@ -175,7 +185,7 @@ const ShopDashboard = () => {
                         <input type="text" placeholder="Sizes Available (e.g. S,M,L)" required className="bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none font-medium" onChange={e => setProductForm({...productForm, sizesAvailable: e.target.value})} defaultValue={productForm.sizesAvailable} />
                         <textarea placeholder="Write a short description..." className="md:col-span-2 bg-white border border-slate-200 rounded-xl py-3 px-4 outline-none font-medium min-h-[100px]" onChange={e => setProductForm({...productForm, description: e.target.value})} defaultValue={productForm.description}></textarea>
                         
-                        <button type="submit" disabled={!productForm.imageUrl} className="md:col-span-2 py-4 rounded-xl bg-indigo-600 text-white font-bold text-lg hover:bg-indigo-700 transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button type="submit" disabled={!productForm.imageUrls || productForm.imageUrls.length === 0} className="md:col-span-2 py-4 rounded-xl bg-indigo-600 text-white font-bold text-lg hover:bg-indigo-700 transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
                             Publish Listing
                         </button>
                     </form>

@@ -1,104 +1,111 @@
 import React, { useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { Mail, KeyRound, LogIn } from 'lucide-react';
+import { Mail, Lock, LogIn, ArrowRight, ShieldCheck } from 'lucide-react';
+
 const Login = () => {
     const location = useLocation();
     const [email, setEmail] = useState(location.state?.email || '');
-    const [otp, setOtp] = useState('');
-    const [step, setStep] = useState(1); // 1: Email, 2: OTP
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [message, setMessage] = useState('');
     const navigate = useNavigate();
 
-    const handleSendOTP = async (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         setError('');
-        setMessage('Sending OTP...');
+        setLoading(true);
         try {
-            await axios.post('https://hypberlocal-backend.onrender.com/api/auth/send-otp', { email });
-            setMessage('OTP sent to your email.');
-            setStep(2);
-        } catch (err) {
-            setError(err.response?.data?.message || 'Failed to send OTP');
-            setMessage('');
-        }
-    };
-
-    const handleVerifyOTP = async (e) => {
-        e.preventDefault();
-        setError('');
-        setMessage('Verifying your OTP...');
-        try {
-            const res = await axios.post('https://hypberlocal-backend.onrender.com/api/auth/verify-otp', {
-                email,
-                otp
+            const res = await axios.post('https://hypberlocal-backend.onrender.com/api/auth/login', { 
+                email, 
+                password 
             });
 
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('user', JSON.stringify(res.data.user));
             navigate('/');
         } catch (err) {
-            setError(err.response?.data?.message || 'OTP Verification failed');
-            setMessage('');
+            setError(err.response?.data?.message || 'Invalid email or password');
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div className="flex items-center justify-center min-h-[75vh] w-full px-4 sm:px-0 animate-[fade-in_0.5s_ease-out]">
-            <div className="glass w-full max-w-md p-8 sm:p-10 rounded-3xl shadow-2xl shadow-teal-500/5 border border-white/60">
-                <div className="text-center mb-8 sm:mb-10">
-                    <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-800 tracking-tight leading-tight">
-                        Welcome <span className="gradient-text">Back.</span>
+        <div className="flex items-center justify-center min-h-[90vh] w-full px-4 relative overflow-hidden">
+            {/* Background decorative elements */}
+            <div className="absolute top-1/4 -left-10 w-64 h-64 bg-indigo-600/20 rounded-full blur-3xl animate-pulse-slow font-black"></div>
+            <div className="absolute bottom-1/4 -right-10 w-64 h-64 bg-violet-600/20 rounded-full blur-3xl animate-pulse-slow"></div>
+
+            <div className="glass w-full max-w-lg p-8 sm:p-12 rounded-[2.5rem] relative z-10 animate-float">
+                <div className="text-center mb-10">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 mb-6 text-indigo-400">
+                        <ShieldCheck size={32} />
+                    </div>
+                    <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tighter leading-tight mb-3">
+                        Sign <span className="gradient-text">In.</span>
                     </h2>
-                    <p className="text-slate-500 text-sm mt-2 font-medium">Fast, secure, and passwordless.</p>
+                    <p className="text-slate-400 font-medium tracking-wide">Enter your credentials to continue</p>
                 </div>
                 
-                {error && <div className="bg-rose-50 border border-rose-100 text-rose-500 px-4 py-3 rounded-xl mb-6 text-xs sm:text-sm font-semibold flex items-center shadow-sm animate-shake">{error}</div>}
-                {message && <div className="bg-teal-50 border border-teal-100 text-teal-600 px-4 py-3 rounded-xl mb-6 text-xs sm:text-sm font-semibold flex items-center shadow-sm">{message}</div>}
-
-                {step === 1 && (
-                    <form onSubmit={handleSendOTP} className="space-y-4 sm:space-y-6">
-                        <div className="relative group">
-                            <label className="text-[10px] uppercase tracking-widest font-black text-slate-400 ml-1 mb-1.5 block">Email Identity</label>
-                            <Mail className="absolute left-4 top-[38px] text-slate-400 group-focus-within:text-teal-500 transition-colors" size={18} />
-                            <input type="email" required placeholder="name@email.com"
-                                   value={email}
-                                   className="w-full bg-white border border-slate-200 rounded-2xl py-3 sm:py-3.5 pl-11 pr-4 text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-400 transition-all font-medium text-sm sm:text-base shadow-sm"
-                                   onChange={e => setEmail(e.target.value)} />
-                        </div>
-                        <button type="submit" className="w-full mt-2 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-teal-500 to-blue-500 text-white font-extrabold text-base sm:text-lg hover-scale shadow-lg shadow-teal-500/20 flex items-center justify-center gap-2 active:scale-95 transition-transform">
-                            Send Login OTP <LogIn size={18} />
-                        </button>
-                    </form>
+                {error && (
+                    <div className="bg-rose-500/10 border border-rose-500/20 text-rose-400 px-5 py-4 rounded-2xl mb-8 text-sm font-semibold flex items-center gap-3 animate-shake">
+                        <div className="w-1.5 h-1.5 rounded-full bg-rose-500"></div>
+                        {error}
+                    </div>
                 )}
 
-                {step === 2 && (
-                    <form onSubmit={handleVerifyOTP} className="space-y-4 sm:space-y-6">
-                        <div className="text-slate-500 text-xs sm:text-sm mb-4 text-center bg-slate-50 py-2 rounded-xl border border-slate-100 italic">
-                            OTP sent to <span className="text-slate-800 font-bold">{email}</span>
-                            <button type="button" onClick={() => setStep(1)} className="ml-2 text-teal-600 font-bold hover:underline">Edit</button>
+                <form onSubmit={handleLogin} className="space-y-6">
+                    <div className="space-y-2">
+                        <label className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Email Address</label>
+                        <div className="relative group">
+                            <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-indigo-400 transition-colors" size={20} />
+                            <input 
+                                type="email" 
+                                required 
+                                placeholder="name@domain.com"
+                                value={email}
+                                className="input-field pl-14"
+                                onChange={e => setEmail(e.target.value)} 
+                            />
+                        </div>
+                    </div>
+
+                    <div className="space-y-2">
+                        <div className="flex justify-between items-center px-1">
+                            <label className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Password</label>
+                            <Link to="/forgot-password" size="sm" className="text-[10px] font-bold text-indigo-400 hover:text-indigo-300 uppercase tracking-wider">Forgot?</Link>
                         </div>
                         <div className="relative group">
-                            <label className="text-[10px] uppercase tracking-widest font-black text-slate-400 ml-1 mb-1.5 block">6-Digit Key</label>
-                            <KeyRound className="absolute left-4 top-[38px] text-slate-400 group-focus-within:text-teal-500 transition-colors" size={18} />
-                            <input type="text" required placeholder="••••••" maxLength="6"
-                                   value={otp}
-                                   className="w-full tracking-[0.5em] text-center text-2xl font-black bg-white border border-slate-200 rounded-2xl py-3 sm:py-3.5 px-4 text-slate-800 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-400 transition-all shadow-sm"
-                                   onChange={e => setOtp(e.target.value)} />
+                            <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-indigo-400 transition-colors" size={20} />
+                            <input 
+                                type="password" 
+                                required 
+                                placeholder="••••••••"
+                                value={password}
+                                className="input-field pl-14"
+                                onChange={e => setPassword(e.target.value)} 
+                            />
                         </div>
-                        <button type="submit" className="w-full mt-2 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-teal-500 to-blue-500 text-white font-extrabold text-base sm:text-lg hover-scale shadow-lg shadow-teal-500/20 flex items-center justify-center gap-2 active:scale-95 transition-transform">
-                            Verify & Sign In
-                        </button>
-                        <button type="button" onClick={handleSendOTP} className="w-full text-slate-400 hover:text-teal-600 mt-2 text-xs sm:text-sm font-bold transition-colors">
-                            Did not receive OTP? Resend
-                        </button>
-                    </form>
-                )}
+                    </div>
 
-                <div className="mt-8 pt-8 border-t border-slate-100 text-center">
-                    <p className="text-slate-400 text-xs sm:text-sm font-bold uppercase tracking-tight">
-                        New to neighborhood? <Link to="/register" className="text-teal-500 hover:text-teal-600 transition-colors ml-1">Join HyperLocal</Link>
+                    <button 
+                        type="submit" 
+                        disabled={loading}
+                        className="btn-primary w-full mt-4 flex items-center justify-center gap-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed group"
+                    >
+                        {loading ? 'Authenticating...' : 'Sign In'}
+                        {!loading && <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />}
+                    </button>
+                </form>
+
+                <div className="mt-12 pt-8 border-t border-white/5 text-center">
+                    <p className="text-slate-400 text-sm font-medium">
+                        Don't have an account? 
+                        <Link to="/register" className="text-indigo-400 hover:text-indigo-300 font-bold ml-2 transition-colors inline-flex items-center gap-1 group">
+                            Create Account
+                            <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                        </Link>
                     </p>
                 </div>
             </div>

@@ -7,16 +7,18 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
       },
       colors: {
-        brand: {
-          50: '#f0fdfa',
-          100: '#ccfbf1',
-          500: '#14b8a6',
-          600: '#0d9488',
-          900: '#134e4a',
+        indigo: {
+          950: '#05051a',
+        },
+        violet: {
+          950: '#0a0a22',
         }
+      },
+      animation: {
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       }
     },
   },
